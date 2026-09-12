@@ -1,6 +1,7 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "types": ["react", "node"],
     "strict": true,
     "paths": {
       "@/*": [

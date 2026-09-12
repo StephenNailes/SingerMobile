@@ -6,6 +6,10 @@ node_modules/
 # Expo
 .expo/
 dist/
+dist-native/
+output/
+.playwright-cli/
+/public/sql-wasm.wasm
 web-build/
 expo-env.d.ts
 
