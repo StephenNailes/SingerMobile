@@ -36,7 +36,7 @@ function writeFile(storage: IDBDatabase, bytes: Uint8Array): Promise<void> {
     tx.onerror = () => reject(tx.error);
   });
 }
-export function connect(): Promise<Database> {
+export function connect(options?: { seed?: boolean }): Promise<Database> {
   if (!connection)
     connection = (async () => {
       if (!navigator.locks)
@@ -110,7 +110,7 @@ export function connect(): Promise<Database> {
           }, true),
       };
       try {
-        await initializeDatabase(db);
+        await initializeDatabase(db, options);
         return db;
       } catch (error) {
         native.close();

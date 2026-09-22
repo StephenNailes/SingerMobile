@@ -29,6 +29,7 @@ import {
 import { useDirectory } from "@/data/directory-context";
 import { emptySinger, genres, type Singer } from "@/data/singers";
 import ActionSheet from "./action-sheet";
+import SyncPill from "./sync-pill";
 import {
   ActionButton,
   EmptyState,
@@ -140,6 +141,8 @@ export default function DirectoryScreen({
           onPress={() => router.push("/singer/new")}
         />
       </View>
+
+      <SyncPill />
 
       <View style={styles.hero}>
         <Eyebrow>

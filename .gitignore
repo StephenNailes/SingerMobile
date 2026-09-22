@@ -45,3 +45,6 @@ example
 # generated native folders
 /ios
 /android
+
+# Expo env (the API URL lives here)
+.env

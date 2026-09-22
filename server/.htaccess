@@ -1,0 +1,27 @@
+RewriteEngine On
+
+# --- existing students routes, unchanged ---
+RewriteRule ^students/?$ students.php [NC,L]
+RewriteRule ^students/([0-9]+)/?$ students.php?id=$1 [NC,L]
+
+# --- Tinig singer directory ---
+# /singers      -> singers.php
+# /singers/12   -> singers.php?id=12
+# QSA keeps the rest of the query string, so /singers?q=lea&genre=Pop works.
+RewriteRule ^singers/?$ singers.php [NC,L,QSA]
+RewriteRule ^singers/([0-9]+)/?$ singers.php?id=$1 [NC,L,QSA]
+
+# CGI/FastCGI strips the Authorization header; this puts it back so
+# getallheaders() in auth.php can see it.
+SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0
+
+# A browser preflight (OPTIONS) must reach singers.php untouched -- the app on
+# the web sends one before every POST, PUT, PATCH and DELETE.
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [L]
+
+# Note: no <Limit> / <LimitExcept> block here on purpose. Those need
+# mod_access_compat on Apache 2.4, and when it is missing the whole directory
+# returns 500. PUT/PATCH/DELETE reach PHP fine without one. If your host really
+# does block them, the app can fall back to POST + ?_method=PUT, which
+# singers.php already understands.
