@@ -2,6 +2,20 @@
 
 A Filipino singers directory built with Expo 57, TypeScript, Tailwind 4, and SQLite.
 
+## Public repository and third-party API
+
+Source code, PHP backend scripts, database schema, and Postman requests are available in the public repository:
+
+https://github.com/StephenNailes/SingerMobile
+
+The app's chosen third-party singers API is hosted on Freehostia and is available at:
+
+http://nailes.duckdns.org/singers.php
+
+Set this URL as `EXPO_PUBLIC_API_URL` in `.env` to enable the remote PHP API. If it is left blank, Tinig uses its local SQLite directory instead.
+
+The PHP backend is in `server/`, including `singers.php`, `connection.php`, `schema.sql`, and `setup-check.php`.
+
 ## Run
 
 Use Node 24 LTS (Expo requires at least Node 22.13; repository tests use Node's SQLite module).
